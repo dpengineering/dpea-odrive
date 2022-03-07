@@ -1,7 +1,7 @@
 # dpea-odrive
 
 ## DISCLAIMER
-This library is meant to replace [RPI_Odrive](https://github.com/dpengineering/RPi_ODrive)
+This library is meant to replace [RPI_ODrive](https://github.com/dpengineering/RPi_ODrive)
 and be used for the 2022-2023 school year.
 
 ## About
@@ -12,9 +12,8 @@ more detailed information, consider visiting the below links and digging around.
  - [Official ODrive Github Repo](https://github.com/odriverobotics/ODrive)
 
 ## Usage
-To get your ODrive Motor Controller up and running, please visit the following guide
-
-LINK TO WEBSITE
+To get your ODrive up and running, please navigate to the following site --
+* [DPEA ODrive Getting Started](https://dpengineering.github.io/dpea-odrive/)
 
 ## Common Errors
 * `DC_BUS_OVER_REGEN_CURRENT`
