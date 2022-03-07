@@ -1,2 +1,2 @@
 # dpea-odrive
-Helper library for DPEA projects that use ODrive motor controller.
+Helper library for DPEA projects that use the ODrive motor controller.
