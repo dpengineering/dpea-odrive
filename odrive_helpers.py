@@ -95,7 +95,7 @@ class ODriveAxis:
     def set_calibration_current(self, calib_current):
         self.axis.motor.config.calibration_current = calib_current
 
-    # returns the allowed calibraiton current. By default, it is 5 amps (3 phase not DC)
+    # returns the allowed calibration current.
     def get_calibration_current(self):
         return self.axis.motor.config.calibration_current
 
@@ -206,7 +206,6 @@ class ODriveAxis:
             self.axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
         self.axis.controller.config.input_mode = INPUT_MODE_PASSTHROUGH
         self.axis.controller.config.control_mode = CONTROL_MODE_TORQUE_CONTROL
-
         self.axis.controller.input_torque = curr
 
     def set_torque(self, torque):
@@ -236,10 +235,14 @@ class ODriveAxis:
     def get_vel_integrator_gain(self):
         return self.axis.controller.config.vel_integrator_gain
 
-    # checks if the motor is moving. Need to use a threshold speed.
+    # checks if the motor is moving using a threshold speed.
     def is_busy(self, speed=0.1):
         sleep(.5)  # allows motor to start moving, specifically for position control
         return (abs(self.get_vel())) > speed
+
+    def wait_for_motor_to_stop(self):
+        while self.is_busy():
+            sleep(1)
 
     def home_with_endstop(self, vel, offset, min_gpio_num):
         self.axis.controller.config.homing_speed = vel  # flip sign to turn CW or CCW
@@ -247,11 +250,8 @@ class ODriveAxis:
         self.axis.min_endstop.config.offset = offset
         self.axis.min_endstop.config.enabled = True
         self.axis.requested_state = AXIS_STATE_HOMING
-
-        sleep(1)
-        while self.is_busy():
-            sleep(1)
-
+        sleep(1)  # allows motor to start moving to offset position
+        self.wait_for_motor_to_stop()
         self.set_home()
         self.axis.error = 0
         self.axis.min_endstop.config.enabled = False
@@ -259,20 +259,8 @@ class ODriveAxis:
     def home_without_endstop(self, vel, offset):
         self.axis.controller.config.homing_speed = vel  # flip sign to turn CW or CCW
         self.set_ramped_vel(self.axis.controller.config.homing_speed, 1)
-        while self.is_busy():
-            sleep(1)
-
+        self.wait_for_motor_to_stop()  # waiting until motor slowly hits wall
         self.set_pos_traj(self.get_pos() + offset, 1, 2, 1)
         sleep(3)  # allows motor to start moving to offset position
-        while self.is_busy():
-            sleep(1)
-
+        self.wait_for_motor_to_stop()
         self.set_home()
-
-    # returns phase B current going into motor
-    def get_curr_B(self):
-        return self.axis.motor.current_meas_phB
-
-    # returns phase C current going into motor
-    def get_curr_C(self):
-        return self.axis.motor.current_meas_phC
