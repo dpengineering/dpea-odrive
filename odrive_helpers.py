@@ -51,14 +51,13 @@ def restore_configuration(od, filename=None):
     odrive.configuration.restore_config(od, filename, logger)
 
 
-class ODrive_Axis(object):
+class ODriveAxis:
 
     def __init__(self, axis, current_lim=10, vel_lim=10):
         self.axis = axis
         self.home = axis.encoder.pos_estimate
         self.axis.motor.config.current_lim = current_lim  # defaults to 10 Amps
         self.axis.controller.config.vel_limit = vel_lim  # defaults at 10 turns/s
-        self.end = float('inf')
 
     # 'frees' the motor from closed loop control
     def idle(self):
@@ -96,7 +95,7 @@ class ODrive_Axis(object):
     def set_calibration_current(self, calib_current):
         self.axis.motor.config.calibration_current = calib_current
 
-    # returns the allowed calibraiton current. By default it is 5 amps (3 phase not DC)
+    # returns the allowed calibraiton current. By default, it is 5 amps (3 phase not DC)
     def get_calibration_current(self):
         return self.axis.motor.config.calibration_current
 
@@ -183,7 +182,7 @@ class ODrive_Axis(object):
     # sets position using the trajectory control mode
     def set_pos_traj(self, pos, accel, vel, decel, inertia=0):
         # BUG: trajectory control not working when invoked after a velocity control, this line is used to
-        # uselessly revert back to position control
+        # switch to position control without any side effects
         self.set_relative_pos(0)
 
         self.axis.trap_traj.config.accel_limit = accel
@@ -201,8 +200,8 @@ class ODrive_Axis(object):
         self.set_pos_traj(rel_pos + self.get_raw_pos() - self.home, accel, vel,
                           decel, inertia)
 
-    # sets the current sent to the motor
-    def set_current(self, curr):  # this is now torque control
+    # sets the current sent to the motor, this is now torque control
+    def set_current(self, curr):
         if self.axis.current_state != AXIS_STATE_CLOSED_LOOP_CONTROL:
             self.axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
         self.axis.controller.config.input_mode = INPUT_MODE_PASSTHROUGH
@@ -237,85 +236,10 @@ class ODrive_Axis(object):
     def get_vel_integrator_gain(self):
         return self.axis.controller.config.vel_integrator_gain
 
-    # checks if the motor is moving. Need to use a threshold speed. by default it is 0 turns/second
+    # checks if the motor is moving. Need to use a threshold speed.
     def is_busy(self, speed=0.1):
-        sleep(
-            .5)  # allows motor to start moving, specifically for position control
-        if (abs(self.get_vel())) > speed:
-            return True
-        else:
-            return False
-
-    # method to home ODrive using where the chassis is mechanically stopped
-    # length is expected length of the track the ODrive takes
-    # set length to -1 if you do not want the ODrive to check its homing
-    # direction = 1 or -1 depending on which side of the track you want home to be at
-    # use direction = 1 if you want the track to be of only positive location values
-    def home(self, current1, current2, length=-1, direction=1):
-        self.set_current(current1 * -1 * direction)
-        print('here')
-        sleep(1)
-        print('there')
-        while self.is_busy():
-            pass
-
-        sleep(1)
-
-        self.set_home()
-        print(self.get_pos())
-
-        sleep(1)
-
-        if not length == -1:
-            self.set_current(current2 * 1 * direction)
-            sleep(1)
-            while self.is_busy():
-                pass
-
-            # end pos should be length
-            if abs(self.get_pos() - length) > 50:
-                print('ODrive could not home correctly')
-                # maybe throw a more formal error here
-                return False
-
-        self.set_pos(0)
-        print('ODrive homed correctly')
-        return True
-
-    # homes the motor by having it move towards one side with a constant velocity. Once it can no longer move, it considers this its home
-    # The direction can be specified either by the sign of the velocty passed in or through the direction parameter
-    # If the length of the track is known, it can be passed in. If this is done, after moving to one side, the motor will move to the other to find if the homing was successful.
-    def home_with_vel(self, vel=.5, length=-1, direction=1):
-        self.set_vel(vel * -1 * direction)
-        print('here')
-        sleep(1)
-        print('there')
-        while self.is_busy():
-            pass
-
-        sleep(1)
-
-        self.set_home()
-        print(self.get_pos())
-
-        sleep(1)
-
-        if not length == -1:
-            self.set_vel(vel * 1 * direction)
-            sleep(1)
-            while self.is_busy():
-                pass
-
-            print(self.get_pos())
-
-            # end pos should be length
-            if abs(self.get_pos() - length) > 50:
-                print('ODrive could not home correctly')
-                # maybe throw a more formal error here
-                return False
-
-        print('ODrive homed correctly')
-        return True
+        sleep(.5)  # allows motor to start moving, specifically for position control
+        return (abs(self.get_vel())) > speed
 
     def home_with_endstop(self, vel, offset, min_gpio_num):
         self.axis.controller.config.homing_speed = vel  # flip sign to turn CW or CCW
@@ -339,7 +263,7 @@ class ODrive_Axis(object):
             sleep(1)
 
         self.set_pos_traj(self.get_pos() + offset, 1, 2, 1)
-        sleep(3)  # allows to start moving to offset position
+        sleep(3)  # allows motor to start moving to offset position
         while self.is_busy():
             sleep(1)
 
@@ -352,11 +276,3 @@ class ODrive_Axis(object):
     # returns phase C current going into motor
     def get_curr_C(self):
         return self.axis.motor.current_meas_phC
-
-    # Clears all the errors on the axis
-    def clear_errors(self):
-        self.axis.error = 0
-        self.axis.encoder.error = 0
-        self.axis.motor.error = 0
-        self.axis.controller.error = 0
-        # There is also sensorless estimator errors but those are super rare and I am not sure what the object field is called to ima just leave it
