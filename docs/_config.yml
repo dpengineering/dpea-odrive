@@ -1,1 +1,19 @@
 remote_theme: just-the-docs/just-the-docs
+
+# Enable or disable the site search
+search_enabled: true
+
+# Set the search token separator for hyphenated-word search:
+search_tokenizer_separator: /[\s/]+/
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "dpea-odrive on GitHub":
+    - "https://github.com/dpengineering/dpea-odrive"
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
