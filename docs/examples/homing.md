@@ -5,7 +5,7 @@ parent: Examples
 nav_order: 3
 ---
 
-# Connecting to ODrive
+# Homing an ODrive Motor
 {: .no_toc }
 
 1. TOC

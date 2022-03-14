@@ -5,7 +5,7 @@ parent: Examples
 nav_order: 5
 ---
 
-# Connecting to ODrive
+# Controlling Velocity of a Motor
 {: .no_toc }
 
 1. TOC
