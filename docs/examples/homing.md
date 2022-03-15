@@ -2,7 +2,7 @@
 layout: default
 title: Homing
 parent: Examples
-nav_order: 3
+nav_order: 5
 ---
 
 # Homing an ODrive Motor
