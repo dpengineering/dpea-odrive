@@ -1,0 +1,50 @@
+<MainScreen>:
+
+    name: 'main'
+    FloatLayout:
+        size_hint: None, None
+
+    DPEAButton:
+        id: test_button
+        text: '>'
+        font_size: self.width * .5
+        size_hint: .1, 1
+        pos_hint: {"x": .9, "y":0}
+        color: 0, 1, 0, 1
+        on_press: root.switch_to_traj()
+
+    DPEAButton:
+        text: "<"
+        font_size: self.width * .5
+        size_hint: .1, 1
+        pos_hint: {"x": 0, "y":0}
+        color: 1, 0, 0, 1
+        on_press: root.switch_to_gpio()
+
+<TrajectoryScreen>:
+
+    name: 'main'
+    FloatLayout:
+        size_hint: None, None
+
+    DPEAButton:
+        id: test_button
+        text:'back'
+        size: 100, 100
+        pos_hint: {"center_x": 0.5, "center_y":0.5}
+        color: 0, 1, 0, 1
+        on_press: root.switch_screen()
+
+<GPIOScreen>:
+
+    name: 'main'
+    FloatLayout:
+        size_hint: None, None
+
+    DPEAButton:
+        id: test_button
+        text:'back'
+        size: 100, 100
+        pos_hint: {"center_x": 0.5, "center_y":0.5}
+        color: 0, 1, 0, 1
+        on_press: root.switch_screen()
