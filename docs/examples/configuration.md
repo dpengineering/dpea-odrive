@@ -47,7 +47,7 @@ odrivetool restore-config <my_config_filename>.json
 Make sure to designate the full filepath to your JSON file (e.g. /home/soft-dev/Documents/my_config.json). At this
 point, your configuration backup will be restored and saved to the ODrive.
 
-## Erasing the Configuration
+## Erase the Configuration
 If you are starting development on a new ODrive, chances are that it has a configuration that is not compatible
 with your motor setup. To start from scratch, open `odrivetool` and erase the existing configuration with
 
