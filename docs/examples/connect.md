@@ -24,10 +24,13 @@ ax = ODriveAxis(od.axis0)
 
 dump_errors(od)
 ```
+The `ax = ODriveAxis(od.axis0)` line is used to refer to one of the two motors on our board. Each ODrive board can
+control up to two motors. Take a look at the example below to see how you can connect to a 3-axis setup.
 
 ## Connecting to Multiple ODrives
-The `serial_number` for each board can be found using `odrivetool`. The serial number will be in the blue text that
-says, `Connected to <serial_number> as odrv0`. Have one ODrive plugged in at a time to isolate each serial number.
+The `serial_number` for each board can be found by running `odrivetool` or calling `find_odrive()`. The serial number 
+will be noted in the text that says, `Connected to <serial_number> as odrv0`. This text will be blue in`odrivetool` or 
+will be printed during the call to `find_odrive()`. Have one ODrive plugged in at a time to isolate each serial number.
 ```python
 from odrive_helpers import *
 
