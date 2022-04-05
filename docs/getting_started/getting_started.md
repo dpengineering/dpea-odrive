@@ -44,7 +44,7 @@ folder of this repository. Your goal with this GUI is to have the following --
 * A button that toggles between moving the motor 5 rotations clockwise and counterclockwise
 * A slider that controls the velocity of the motor
 * A second slider that controls the acceleration of the motor (i.e. two sliders to handle ramped velocity)
-  * Consider changing your velocity slider to used ramped velocity and retrieve acceleration value from second slider.
+  * Consider changing your velocity slider to use ramped velocity and retrieve the acceleration value from the second slider.
 * If using a constrained motor setup (ex. lead screw with endstops), then add a button that homes the motor. You can
   home the motor using an endstop sensor/switch or until a wall is hit. Refer to the homing example for more info.
 * Another screen that controls the motor with trapezoidal trajectory control. Have text boxes 

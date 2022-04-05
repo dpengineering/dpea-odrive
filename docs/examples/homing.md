@@ -11,6 +11,11 @@ nav_order: 5
 1. TOC
 {:toc}
 ---
+Sometimes, your motor setup will not be able to spin indefinitely. You may be constrained by walls that your motor has
+to move within. In this case, it is useful to home your motor position so that you have a relative starting position
+when your application starts up for the first time. You can either use a dedicated switch/sensor to trigger the home 
+position, or you can _softly_ rotate your motor into a wall until it cannot move anymore. Both methods are highlighted
+below as `ax.home_with_endstop` and `ax.home_without_endstop` respectively.
 
 ```python
 from odrive_helpers import *
