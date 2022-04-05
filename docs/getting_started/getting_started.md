@@ -19,16 +19,17 @@ TBD
 After you have followed the [Getting Started section in ODrive Docs](https://docs.odriverobotics.com/v/latest/getting-started.html)
 and have successfully controlled your motor using `odrivetool`, it is time to start using the
 [odrive_helpers](https://github.com/dpengineering/dpea-odrive/blob/main/odrive_helpers.py) library.
-This library will allow you to automate the process of using `odrivetool` by bundling many of the commands in Python.
+This library will allow you to automate the process of using `odrivetool` by bundling many of the commands into Python.
 
 For example, to move the motor one revolution in `odrivetool` we would need to do the following,
 ``` 
 odrv0.axis0.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
 odrv0.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+odrv0.axis0.controller.config.control_mode = CONTROL_MODE_POSITION_CONTROL
 odrv0.axis0.controller.input_pos = 1
 ```
 
-But using the `odrive_helpers` library we would simply need to run a command such as
+But, using the `odrive_helpers` library we would simply need to run commands such as
 ```python
 axis0.calibrate()
 axis0.set_pos(1)
@@ -43,9 +44,11 @@ folder of this repository. Your goal with this GUI is to have the following --
 * A button that toggles between moving the motor 5 rotations clockwise and counterclockwise
 * A slider that controls the velocity of the motor
 * A second slider that controls the acceleration of the motor (i.e. two sliders to handle ramped velocity)
-* Button that homes the motor, either to position 0, or until a wall is hit, whichever comes first.
-* Another screen that controls the motor with trapezoidal trajectory control. 
-  Have text boxes for acceleration, target position, and deceleration plus a submit button to send the command to the motor.
+  * Consider changing your velocity slider to used ramped velocity and retrieve acceleration value from second slider.
+* If using a constrained motor setup (ex. lead screw with endstops), then add a button that homes the motor. You can
+  home the motor using an endstop sensor/switch or until a wall is hit. Refer to the homing example for more info.
+* Another screen that controls the motor with trapezoidal trajectory control. Have text boxes 
+  for acceleration, target position, and deceleration plus a submit button to send the command to the motor.
 * Another screen which utilizes a GPIO pin to move the motor when a sensor or switch is activated.
 
 
