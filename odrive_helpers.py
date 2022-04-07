@@ -1,5 +1,4 @@
 from time import time, sleep
-import logging
 
 import odrive
 import odrive.configuration
@@ -30,25 +29,14 @@ def reboot_odrive(od):
         return find_odrive(serial_number=ser_num)
 
 
-def save_odrive_configuration(od):
-    od.axis0.requested_state = AXIS_STATE_IDLE
-    od.axis1.requested_state = AXIS_STATE_IDLE
-    try:
-        od.save_configuration()
-    except fibre.ObjectLostError:
-        print("Saved Configuration and Disconnected")
+def digital_read(od, pin_num):
+    assert 1 <= pin_num <= 8 and type(pin_num) is int, "This function only supports pin numbers 1 through 8"
+    return int(bin(od.get_gpio_states())[-1 - pin_num])
 
 
-def backup_configuration(od, filename=None):
-    logger = logging.getLogger("backup")
-    logger.setLevel(logging.INFO)
-    odrive.configuration.backup_config(od, filename, logger)
-
-
-def restore_configuration(od, filename=None):
-    logger = logging.getLogger("restore")
-    logger.setLevel(logging.INFO)
-    odrive.configuration.restore_config(od, filename, logger)
+def analog_read(od, pin_num):
+    assert 1 <= pin_num <= 5 and type(pin_num) is int, "Only pins 1 through 5 support analog"
+    return od.get_adc_voltage(pin_num)
 
 
 class ODriveAxis:
@@ -90,8 +78,7 @@ class ODriveAxis:
 
     # sets the current allowed during the calibration sequence
     # Higher currents are needed when the motor encounters more resistance to motion
-    # NOTE: this function does not seem to work consistently, please use calibrate_with_current if encountering
-    # issues with low current during calibration
+    # Increase calibration current if your motor has problems reaching the index location due to mechanical load
     def set_calibration_current(self, calib_current):
         self.axis.motor.config.calibration_current = calib_current
 
@@ -264,3 +251,4 @@ class ODriveAxis:
         sleep(3)  # allows motor to start moving to offset position
         self.wait_for_motor_to_stop()
         self.set_home()
+
