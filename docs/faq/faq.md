@@ -11,6 +11,22 @@ has_children: true
 1. TOC
 {:toc}
 ---
+## What order should I plug my motor wires in?
+You can plug your 3-phase motor wires in any order. It is unclear whether the same motor configuration will behave
+differently with a different A,B,C wire order, so it is best to choose an order and stick with it during your 
+development process.
+
+## What should I use to power up the ODrive?
+We will typically have 24 Volt DC Power Supplies to provide power to your ODrive board. There is a DC power terminal
+on the side of your board. Right next to the DC terminal is the USB port to communicate with your ODrive board. Check 
+out [this diagram](https://docs.odriverobotics.com/v/latest/_images/ODriveBasicWiring.png) for a better understanding
+of the board layout.
+
+## Why do I need a 15A fuse?
+It is important to use a 15A rated fuse on the positive wire for your DC power supply. Most DC power supplies we 
+use are rated for 18A. We do not want any excess current making its way back to the power supply and breaking it, so we
+have a fuse that blows before it makes its way back to the power supply. In general, you want to utilize the fuse that is
+closest to your power supply amp rating without exceeding that rating.
 
 ## Common Errors
 * `DC_BUS_OVER_REGEN_CURRENT`
