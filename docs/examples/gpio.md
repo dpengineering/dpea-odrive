@@ -1,6 +1,6 @@
 ---
 layout: default
-title: GPIO
+title: Using GPIO
 parent: Examples
 nav_order: 7
 ---
