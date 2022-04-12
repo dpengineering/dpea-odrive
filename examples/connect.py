@@ -6,7 +6,7 @@ if __name__ == "__main__":
     assert od.config.enable_brake_resistor is True, "Check for faulty brake resistor."
 
     # axis0 and axis1 correspond to M0 and M1 on the ODrive
-    ax = ODrive_Axis(od.axis0)
+    ax = ODriveAxis(od.axis0)
     # Basic motor tuning, for more precise tuning,
     # follow this guide: https://docs.odriverobotics.com/v/latest/control.html#tuning
     ax.set_gains()
