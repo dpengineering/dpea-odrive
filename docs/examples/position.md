@@ -12,7 +12,7 @@ nav_order: 3
 {:toc}
 ---
 ## Connecting and Calibrating
-```python
+```jupyterpython
 from odrive_helpers import *
 from time import sleep
 
@@ -27,7 +27,7 @@ if not ax.is_calibrated():
 ```
 ## Simple Position Control
 
-```python
+```
 #USING SIMPLE POSITION CONTROL
 ax.set_vel_limit(5)
 ax.set_pos(5)
