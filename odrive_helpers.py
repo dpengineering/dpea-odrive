@@ -171,6 +171,7 @@ class ODriveAxis:
         # BUG: trajectory control not working when invoked after a velocity control, this line is used to
         # switch to position control without any side effects
         self.set_relative_pos(0)
+        self.axis.controller.input_vel = 0
 
         self.axis.trap_traj.config.accel_limit = accel
         self.axis.trap_traj.config.vel_limit = vel
@@ -186,6 +187,14 @@ class ODriveAxis:
     def set_rel_pos_traj(self, rel_pos, accel, vel, decel, inertia=0):
         self.set_pos_traj(rel_pos + self.get_raw_pos() - self.home, accel, vel,
                           decel, inertia)
+
+    def set_pos_filter(self, pos, bandwidth):
+        if self.axis.current_state != AXIS_STATE_CLOSED_LOOP_CONTROL:
+            self.axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+        self.axis.controller.config.control_mode = CONTROL_MODE_POSITION_CONTROL
+        self.axis.controller.config.input_mode = INPUT_MODE_POS_FILTER
+        self.axis.controller.config.input_filter_bandwidth = bandwidth
+        self.axis.controller.input_pos = pos + self.home
 
     # sets the current sent to the motor, this is now torque control
     def set_current(self, curr):
@@ -251,4 +260,3 @@ class ODriveAxis:
         sleep(3)  # allows motor to start moving to offset position
         self.wait_for_motor_to_stop()
         self.set_home()
-

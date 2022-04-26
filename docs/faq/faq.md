@@ -28,6 +28,11 @@ use are rated for 18A. We do not want any excess current making its way back to 
 have a fuse that blows before it makes its way back to the power supply. In general, you want to utilize the fuse that is
 closest to your power supply amp rating without exceeding that rating.
 
+## `odrivetool liveplotter` does not work?
+Sometimes, the liveplotter will not appear on your screen. This can be fixed by typing the following
+in your terminal, `sudo apt-get install python3-tk`. In case it still does not work, try out the following example from
+matplotlib and note if there are any errors -- [example](https://matplotlib.org/2.0.2/examples/api/legend_demo.html).
+
 ## Common Errors
 * `DC_BUS_OVER_REGEN_CURRENT`
   * Your DC power supply is receiving current that it cannot handle. 
