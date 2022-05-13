@@ -12,7 +12,6 @@ def find_odrive(serial_number: str = None):
     print(f"Finding ODrive {serial_number or ''}")
     od = odrive.find_any(serial_number=serial_number)
     print(f"Connected to ODrive {format(od.serial_number, 'X')}")
-    dump_errors(od)
     return od
 
 
