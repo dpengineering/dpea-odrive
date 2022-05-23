@@ -55,3 +55,8 @@ matplotlib and note if there are any errors -- [example](https://matplotlib.org/
     motor will move as fast as it can as opposed to having a smooth acceleration.
     * As a last result, you can also change the margin of error/tolerance that the controller uses to
     determine if your motor is too fast by accessing `odrvX.axisX.controller.config.vel_limit_tolerance`.
+* `[LEGACY_PROTOCOL] previous endpoint operation still not sent` and `libfibre` error
+  * These errors usually show up when you are communicating with the odrive over multiple threads.
+  * The odrive is happiest when there is only one thread communicating with it. Please refrain from having multiple
+    threads writing to or reading from the odrive. This applies if you have one thread checking GPIO while also
+    running a thread which sets the motor velocities.
