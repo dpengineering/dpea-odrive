@@ -47,7 +47,7 @@ matplotlib and note if there are any errors -- [example](https://matplotlib.org/
     * In `odrivetool` type in `odrvX.axisX.motor.config.current_lim`. Does your current limit seem high
     enough? If not, try increasing the current limit in small increments until you no longer receive
     the error.
-* `CONTROLLER_ERROR_OVERSPEED` & `CONTROLLER_ERROR_SPINOUT_DETECTED`
+* `CONTROLLER_ERROR_OVERSPEED`
   * Your motor has exceeded its velocity limit and moved faster/farther than it was supposed to.
     * In `odrivetool` type in `odrvX.axisX.controller.config.vel_limit` to see your chosen motor's 
     velocity limit. Does this value make sense? 
@@ -60,3 +60,12 @@ matplotlib and note if there are any errors -- [example](https://matplotlib.org/
   * The odrive is happiest when there is only one thread communicating with it. Please refrain from having multiple
     threads writing to or reading from the odrive. This applies if you have one thread checking GPIO while also
     running a thread which sets the motor velocities.
+* `CONTROLLER_ERROR_SPINOUT_DETECTED`
+  * This error is one of the harder ones to diagnose. It occurs when an incorrect encoder offset is detected. In other
+    words, the motor moved too fast for the encoder to stay synchronized, and thus the encoder has 'spun out'.
+  * If you ever hear your motor sputter out or continue to move much faster than you've intended, this error might be
+    behind it.
+  * To fix this error, start by first replacing the encoder cables, then the encoder itself, and lastly if the error still
+    persists after testing a new cable and encoder, try increasing the bandwidth of the encoder in `odrivetool`.
+    * You can increase the encoder bandwidth using `odrvX.axisX.encoder.config.bandwidth`. The default value in 
+      `odrivetool` should be 1000 hz.
