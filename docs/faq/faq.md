@@ -69,3 +69,27 @@ matplotlib and note if there are any errors -- [example](https://matplotlib.org/
     persists after testing a new cable and encoder, try increasing the bandwidth of the encoder in `odrivetool`.
     * You can increase the encoder bandwidth using `odrvX.axisX.encoder.config.bandwidth`. The default value in 
       `odrivetool` should be 1000 hz.
+## How do I backup the configuration of my ODrive?
+It is important to back up the custom configuration of your ODrive board. It is not uncommon to spend a fair bit of  time 
+over the course of a project making custom configurations to your ODrive board. Furthermore, it is not uncommon to make these
+custom configurations in the odrivetool in the command line, so there is often no record of these custom configurations. 
+So it is a great idea to create a backup of this and commit it to your github repo. Fortunately it is easy to create a backup
+of the odrive configuration. 
+* To perform a backup of the odrive configuration do the following. This assumes the odrive board you wish to perform a backup 
+  of is plugged into the usb port of the raspberry pi for your project.
+  * Close all connections to the odrive. Close any python or odrivetool sessions that are connected to the odrive. 
+  * Open a terminal session on the Raspberry Pi
+  * change your location to the directory that has the git repo for the project
+  * at the terminal enter the following command:
+    * odrivetool backup-config yourprojectname-odrivebackup.json
+    * This will create a .json file that details all the odrive settings.
+    * Then commit this file in git and push it to github
+
+* To restore odrive configuration from a .json file onto an existing odrive or a new odrive do the following: This assumes
+  the odrive board you wish to perform the restore onto is plugged into the usb port of the raspberry pi for your project.
+  * Close all connections to the odrive. Close any python or odrivetool sessions that are connected to the odrive. 
+  * Open a terminal session on the Raspberry Pi
+  * change your location to the directory that has the git repo for the project and thus the .json file that you want to restore.
+  * at the terminal enter the following command:
+    * odrivetool restore-config yourprojectname-odrivebackup.json
+    * This will restore the odrive settings from the yourprojectname-odrivebackup.json file.
