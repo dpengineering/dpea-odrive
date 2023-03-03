@@ -69,6 +69,7 @@ matplotlib and note if there are any errors -- [example](https://matplotlib.org/
     persists after testing a new cable and encoder, try increasing the bandwidth of the encoder in `odrivetool`.
     * You can increase the encoder bandwidth using `odrvX.axisX.encoder.config.bandwidth`. The default value in 
       `odrivetool` should be 1000 hz.
+      
 ## How do I backup the configuration of my ODrive?
 It is important to back up the custom configuration of your ODrive board. It is not uncommon to spend a fair bit of  time 
 over the course of a project making custom configurations to your ODrive board. Furthermore, it is not uncommon to make these
@@ -93,3 +94,10 @@ of the odrive configuration.
   * at the terminal enter the following command:
     * odrivetool restore-config yourprojectname-odrivebackup.json
     * This will restore the odrive settings from the yourprojectname-odrivebackup.json file.
+
+## How do I enable the brake resitor?
+* To enable the brake resitor
+  * Start odrivetool
+  * odrv0.config.enable_brake_resistor = True
+  * odrv0.save_configuration()
+
