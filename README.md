@@ -14,3 +14,24 @@ more detailed information, consider visiting the below links and digging around.
 ## Usage
 To get your ODrive up and running, please navigate to the following site --
 * [DPEA ODrive Getting Started](https://dpengineering.github.io/dpea-odrive/)
+
+## Build Instructions
+To build the PyPI project, run the following:
+
+Install python build package
+```python3 -m pip install --upgrade build```
+
+Install twine
+```python3 -m pip install --upgrade twine```
+
+Build package (make sure to change the version in pyproject.toml to provent version collision!):
+```python3 -m build```
+
+Push the project to PyPi:
+```python3 -m twine upload dist/*```
+
+Twine will prompt you for a password. Use
+```
+Username: __token__
+Password: YOUR_API_TOKEN
+```
