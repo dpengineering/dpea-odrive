@@ -16,8 +16,7 @@ from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 
 sys.path.append("/home/soft-dev/Documents/dpea-odrive/")
-from odrive_helpers import *
-
+from dpea_odrive.odrive_helpers import *
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 
