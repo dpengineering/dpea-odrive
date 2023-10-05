@@ -5,7 +5,7 @@ import sys
 
 sys.path.append("/home/soft-dev/Documents/dpea-odrive")
 
-from odrive_helpers import *
+from dpea_odrive.odrive_helpers import *
 from odrive.utils import start_liveplotter
 from odrive.enums import AXIS_ERROR_WATCHDOG_TIMER_EXPIRED
 from time import sleep
