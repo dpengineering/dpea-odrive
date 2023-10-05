@@ -1,4 +1,4 @@
-from odrive_helpers import *
+from dpea_odrive.odrive_helpers import *
 
 if __name__ == "__main__":
     od = find_odrive()
