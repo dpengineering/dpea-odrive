@@ -3,7 +3,7 @@ import sys
 sys.path.append("/home/soft-dev/packages/RaspberryPiCommon")
 sys.path.append("/home/soft-dev/Documents/dpea-odrive")
 
-from odrive_helpers import *
+from dpea_odrive.odrive_helpers import *
 from time import sleep
 from pidev.Joystick import Joystick
 from threading import Thread
