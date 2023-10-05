@@ -18,8 +18,7 @@ position, or you can _softly_ rotate your motor into a wall until it cannot move
 below as `ax.home_with_endstop` and `ax.home_without_endstop` respectively.
 
 ```python
-from odrive_helpers import *
-
+from dpea_odrive.odrive_helpers import *
 od = find_odrive()
 assert od.config.enable_brake_resistor is True, "Check for faulty brake resistor."
 

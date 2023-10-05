@@ -15,7 +15,7 @@ nav_order: 7
 ## Reading Digital Signals
 You can read digital signals on pins 1-8 (and encoder A,B,Z pins) using 
 ```python
-from odrive_helpers import digital_read
+from dpea_odrive.odrive_helpers import digital_read
 digital_read(od, pin_num)
 ```
 Ensure that your pin is set to digital input in `odrivetool` with  

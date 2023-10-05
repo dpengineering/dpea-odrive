@@ -13,7 +13,7 @@ nav_order: 4
 ---
 ## Connecting and Calibrating
 ```python
-from odrive_helpers import *
+from dpea_odrive.odrive_helpers import *
 from time import sleep
 
 od = find_odrive()
