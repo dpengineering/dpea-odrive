@@ -13,8 +13,7 @@ nav_order: 2
 ---
 
 ```python
-from odrive_helpers import *
-
+from dpea_odrive.odrive_helpers import *
 od = find_odrive()
 
 assert od.config.enable_brake_resistor is True, "Check for faulty brake resistor."
