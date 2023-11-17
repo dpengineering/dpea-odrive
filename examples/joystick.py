@@ -9,6 +9,12 @@ from pidev.Joystick import Joystick
 from threading import Thread
 from odrive.utils import start_liveplotter
 
+# Below are two lines you can uncomment if the liveplotter is not appearing. If you uncomment these lines and receive an error, it may be the
+# case that you need to install packages. To install the packages: $ sudo apt-get install python3-pil python3-pil.imagetk
+
+# import matplotlib
+# matplot.use('TkAgg')
+
 joy = Joystick(0, False)
 
 
