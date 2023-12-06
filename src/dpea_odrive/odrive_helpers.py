@@ -259,3 +259,5 @@ class ODriveAxis:
         sleep(3)  # allows motor to start moving to offset position
         self.wait_for_motor_to_stop()
         self.set_home()
+    def toggle_circ_pos(self):
+        self.axis.controller.config.circular_setpoints = not self.axis.controller.config.circular_setpoints
