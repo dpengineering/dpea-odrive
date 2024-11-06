@@ -11,6 +11,20 @@ has_children: false
 1. TOC
 {:toc}
 ---
+## I am getting import errors and odrive is outdated.
+Note that import errors in actual projects are likely caused by the old import file structure: e.g. 
+```
+from odrive_helpers import *
+```
+Should actually be:
+```
+from dpea_odrive.odrive_helpers import *
+```
+On older projects, issues might also arise from having a newer version of the odrive library: ensure that you're on v 0.5.4 by running:
+```
+pip3 install odrive==0.5.4
+```
+
 ## What order should I plug my motor wires in?
 You can plug your 3-phase motor wires in any order. It is unclear whether the same motor configuration will behave
 differently with a different A,B,C wire order, so it is best to choose an order and stick with it during your 

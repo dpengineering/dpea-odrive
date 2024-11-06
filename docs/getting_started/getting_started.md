@@ -22,20 +22,9 @@ and have successfully controlled your motor using `odrivetool`, it is time to st
 
 We can install this library using a `pip install`: 
 ```
-pip3 install dpea_odrive 
+pip3 install dpea-odrive 
 ```
-Note that import errors in actual projects are likely caused by the old import file structure: e.g. 
-```
-from odrive_helpers import *
-```
-Should actually be:
-```
-from dpea_odrive.odrive_helpers import *
-```
-Issues might also arise from having a newer version of the odrive library: ensure that you're on v 0.5.4 by running:
-```
-pip3 install odrive==0.5.4
-```
+
 
 This library will allow you to automate the process of using `odrivetool` by bundling many of the commands into Python.
 For example, to move the motor one revolution in `odrivetool` we would need to do the following,
