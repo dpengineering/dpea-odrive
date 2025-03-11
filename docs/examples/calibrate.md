@@ -23,7 +23,7 @@ assert od.config.enable_brake_resistor is True, "Check for faulty brake resistor
 ax = ODriveAxis(od.axis0, current_lim=10, vel_lim=10)
 
 # Basic motor tuning, for more precise tuning,
-# follow this guide: https://docs.odriverobotics.com/v/latest/control.html#tuning
+# follow this guide: https://docs.odriverobotics.com/v/0.5.6/control.html#control-doc
 ax.set_gains()
 
 if not ax.is_calibrated():
@@ -35,7 +35,7 @@ print("Velocity Limit: ", ax.get_vel_limit())
 
 dump_errors(od)
 ```
-## Startup Calibration
+## Startup Calibration - Motor
 At some point, you will most likely want your ODrive motor to be pre-calibrated on startup. What this means
 is that you don't have to run through the calibration sequence everytime you turn on your ODrive. To do this,
 read through [this guide](https://discourse.odriverobotics.com/t/skip-calibration-startup-procces/3787/2) first. In short,
@@ -57,7 +57,7 @@ type in the following into `odrivetool`.
 **Importantly**, there are two ways to calibrate your encoder. You can either do the normal offset calibration everytime
 or do an index calibration which seeks a specific part of your encoder. You can only do an index encoder calibration if
 you have an encoder with a Z signal, which most of our encoders have. For more info, refer to the [ODrive encoder info 
-page](https://docs.odriverobotics.com/v/latest/encoders.html). We should always try to calibrate our encoders using index
+page](https://docs.odriverobotics.com/v/0.5.6/encoders.html). We should always try to calibrate our encoders using index
 calibration when we can.
 
 To calibrate an encoder using its index (Z) signal, we first need to disengage the motor from anything other than the 
