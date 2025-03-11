@@ -14,7 +14,7 @@ nav_order: 1
 ## Connecting to a Single ODrive
 ```python
 from dpea_odrive.odrive_helpers import *
-od = find_odrive()
+od = find_odrive(serial_number="12345ABC")
 
 assert od.config.enable_brake_resistor is True, "Check for faulty brake resistor."
 
