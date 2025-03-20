@@ -4,7 +4,9 @@ sys.path.append("/home/soft-dev/Documents/dpea-odrive")
 
 from dpea_odrive.odrive_helpers import *
 from odrive.utils import start_liveplotter
-from time import sleep
+import matplotlib
+matplotlib.use('TkAgg')  # Use a backend that doesn't require a GUI
+from time import sleep, time
 
 if __name__ == "__main__":
     od = find_odrive()
