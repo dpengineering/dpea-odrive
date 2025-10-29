@@ -25,7 +25,7 @@ mode in `odrivetool` with,
 ```
 
 The next step is to set up an analog mapping on either Pin 3 or Pin 4. 
-At the moment, please refer to the [guide on ODrive Docs](https://docs.odriverobotics.com/v/latest/analog-input.html) to
+At the moment, please refer to the [guide on ODrive Docs](https://docs.odriverobotics.com/v/0.5.6/analog-input.html) to
 implement analog input mapping.
 
 In short, we will use `odrivetool` to configure the following --
