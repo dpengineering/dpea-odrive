@@ -12,11 +12,32 @@ has_children: false
 {:toc}
 ---
 
-## Intro
-TBD
+## 🤖 ODrive: Powering DPEA Projects
+
+**ODrive motors** are central to a variety of exhibits within the DPEA. They are a powerful, high-performance alternative to traditional **stepper** and **DC motors**, making them essential for driving our most demanding and precise projects.
+
+---
+
+### **Key Advantages of ODrive**
+
+ODrive controllers excel in applications requiring high dynamic performance and precise control because they drive **brushless DC (BLDC) motors**. Unlike open-loop stepper or basic DC motors, the ODrive system provides:
+
+* **Torque and Speed Control:** Excellent at both high speeds and when maximum torque is needed, ensuring smooth and reliable motion.
+* **High Precision:** Utilizes feedback from high-resolution **encoders** to maintain exact position, velocity, or torque, even under changing loads.
+* **Energy Efficiency:** BLDC motors driven by ODrive are generally more efficient than brushed or stepper alternatives, crucial for battery-powered or continuous-use exhibits.
+
+---
+
+### **Examples of ODrive Integration in DPEA Exhibits**
+
+ODrive motors are used in projects where strength, smoothness, and fine control are paramount. Some examples include:
+
+* **High-Speed or High-Torque Actuators:** Driving robotic arms or kinetic sculptures that require rapid, powerful, and repeatable movements.
+* **Precision Gimbals and Camera Sliders:** Achieving the ultra-smooth, slow, and precise motion necessary for professional-grade film equipment and automated photography setups.
+* **Balancing and Stability Platforms:** Providing the quick, corrective torque needed for systems like inverted pendulums or dynamic stability demonstrators.
 
 ## Using this Library in Python
-After you have followed the [Getting Started section in ODrive Docs](https://docs.odriverobotics.com/v/latest/getting-started.html)
+After you have followed the [Getting Started section in ODrive Docs](https://docs.odriverobotics.com/v/0.5.6/getting-started.html)
 and have successfully controlled your motor using `odrivetool`, it is time to start using the
 [odrive_helpers](https://github.com/dpengineering/dpea-odrive/blob/main/odrive_helpers.py) library.
 
@@ -45,8 +66,7 @@ To experiment with the `odrive_helpers` library, run `ipython3` and follow along
 [examples](/dpea-odrive/examples/examples) in the sidebar.
 
 ## Kivy GUI
-After you have tested each example, let us finish by making a Kivy GUI. You will find template files in the `KivyTemplate`
-folder of this repository. Your goal with this GUI is to have the following --
+After you have tested each example, let us finish by making a Kivy GUI. Your goal with this GUI is to have the following --
 * A button that toggles between moving the motor 5 rotations clockwise and counterclockwise
 * A slider that controls the velocity of the motor
 * A second slider that controls the acceleration of the motor (i.e. two sliders to handle ramped velocity)
